@@ -10,7 +10,7 @@ namespace EMRHLSeasonOne
 	{
 		static List<PlayerInformation> players = new List<PlayerInformation>();
 		static List<SeasonInformation> seasons = new List<SeasonInformation>();
-		static Dictionary<string, string> teams = new Dictionary<string, string>();
+		static Dictionary<string, int> goalPool = new Dictionary<string, int>();
 		static string c = "Canadiens";
 		static string b = "Bruins";
 		static string w = "Whalers";
@@ -21,30 +21,28 @@ namespace EMRHLSeasonOne
 		{
 			Initialize();
 
-			foreach (var item in players)
-			{
-				item.PrintInformation();
-			}
+			//foreach (var item in players)
+			//{
+			//	item.PrintInformation();
+			//}
 
-			foreach (var item in seasons)
-			{
-				item.PrintInformation();
-				item.PrintGoalTotals();
-				item.PrintRegularSeasonGoalTotals();
-			}
+			//foreach (var item in seasons)
+			//{
+			//	item.PrintInformation();
+			//	item.PrintGoalTotals();
+			//	item.PrintRegularSeasonGoalTotals();
+			//}
+
+			OrderPlayersByFewestSeasons();
 
 			Console.ReadLine();
 		}
 
 		static void Initialize()
 		{
-			teams.Add("B", "Bruins");
-			teams.Add("C", "Canadiens");
-			teams.Add("W", "Whalers");
-			teams.Add("S", "Sabres");
-
 			CreatePlayers();
 			CreateSeasons();
+			InitializeGoalPool();
 		}
 
 		static void CreatePlayers()
@@ -280,6 +278,23 @@ namespace EMRHLSeasonOne
 			seasons.Add(s2);
 			seasons.Add(s3);
 			seasons.Add(s4);
+		}
+
+		static void InitializeGoalPool()
+		{
+			foreach (var item in players)
+			{
+				goalPool.Add(item.PlayerName, item.Goals);
+			}
+		}
+
+		static void OrderPlayersByFewestSeasons()
+		{
+			IEnumerable<PlayerInformation> fewest = players.OrderBy(p => p.NumberOfSeasons);
+			foreach (var item in fewest)
+			{
+				item.PrintInformation();
+			}
 		}
 	}
 }
