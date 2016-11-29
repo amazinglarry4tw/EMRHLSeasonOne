@@ -29,7 +29,8 @@ namespace EMRHLSeasonOne
 			foreach (var item in seasons)
 			{
 				item.PrintInformation();
-				item.PrintSeasonGoalTotals();
+				item.PrintGoalTotals();
+				item.PrintRegularSeasonGoalTotals();
 			}
 
 			Console.ReadLine();
@@ -223,7 +224,62 @@ namespace EMRHLSeasonOne
 			s1.AddGameResult("6/9/1999", b, 6, s, 3, true);
 			s1.AddGameResult("6/9/1999", w, 6, b, 4, true);
 
+			SeasonInformation s2 = new SeasonInformation();
+			s2.SeasonNumber = 2;
+			s2.AddGameResult("6/16/1999", w, 10, b, 3);
+			s2.AddGameResult("6/16/1999", c, 6, s, 5);
+			s2.AddGameResult("6/23/1999", s, 9, w, 8);
+			s2.AddGameResult("6/23/1999", c, 4, b, 3);
+			s2.AddGameResult("6/30/1999", s, 12, b, 7);
+			s2.AddGameResult("6/30/1999", w, 13, c, 9);
+			s2.AddGameResult("7/7/1999", c, 8, s, 5);
+			s2.AddGameResult("7/7/1999", w, 11, b, 6);
+			s2.AddGameResult("7/14/1999", c, 10, b, 9);
+			s2.AddGameResult("7/14/1999", w, 8, s, 2);
+			s2.AddGameResult("7/21/1999", w, 12, c, 4);
+			s2.AddGameResult("7/21/1999", s, 5, b, 3);
+			s2.AddGameResult("7/28/1999", b, 6, w, 3, true);
+			s2.AddGameResult("7/29/1999", s, 2, c, 1, true);
+			s2.AddGameResult("7/29/1999", s, 4, b, 1, true);
+
+			SeasonInformation s3 = new SeasonInformation();
+			s3.SeasonNumber = 3;
+			s3.AddGameResult("8/4/1999", c, 10, w, 1);
+			s3.AddGameResult("8/4/1999", s, 11, b, 6);
+			s3.AddGameResult("8/11/1999", w, 8, s, 7);
+			s3.AddGameResult("8/11/1999", b, 14, c, 7);
+			s3.AddGameResult("8/18/1999", s, 7, c, 6);
+			s3.AddGameResult("8/18/1999", b, 9, w, 8);
+			s3.AddGameResult("8/25/1999", b, 16, s, 12);
+			s3.AddGameResult("8/25/1999", c, 12, w, 8);
+			s3.AddGameResult("9/1/1999", b, 10, c, 4);
+			s3.AddGameResult("9/1/1999", w, 5, s, 4);
+			s3.AddGameResult("9/8/1999", w, 9, b, 8);
+			s3.AddGameResult("9/8/1999", c, 10, s, 4);
+			s3.AddGameResult("9/23/1999", b, 6, s, 4, true);
+			s3.AddGameResult("9/23/1999", c, 4, w, 3, true);
+			s3.AddGameResult("9/23/1999", b, 6, c, 4, true);
+
+			SeasonInformation s4 = new SeasonInformation();
+			s4.SeasonNumber = 4;
+			s4.AddGameResult("9/29/1999", b, 9, w, 8);
+			s4.AddGameResult("9/29/1999", c, 9, s, 7);
+			s4.AddGameResult("10/6/1999", w, 13, s, 9);
+			s4.AddGameResult("10/6/1999", b, 7, c, 7);
+			s4.AddGameResult("10/13/1999", b, 10, s, 7);
+			s4.AddGameResult("10/13/1999", c, 11, w, 7);
+			s4.AddGameResult("10/16/1999", c, 8, s, 8);
+			s4.AddGameResult("10/16/1999", b, 8, w, 6);
+			s4.AddGameResult("10/20/1999", c, 9, b, 8);
+			s4.AddGameResult("10/20/1999", w, 16, s, 14);
+			s4.AddGameResult("10/27/1999", c, 13, s, 2, true);
+			s4.AddGameResult("10/27/1999", b, 8, w, 6, true);
+			s4.AddGameResult("10/27/1999", b, 5, c, 4, true);
+
 			seasons.Add(s1);
+			seasons.Add(s2);
+			seasons.Add(s3);
+			seasons.Add(s4);
 		}
 	}
 }

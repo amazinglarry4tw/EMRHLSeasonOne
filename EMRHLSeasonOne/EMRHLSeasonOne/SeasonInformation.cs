@@ -15,6 +15,7 @@ namespace EMRHLSeasonOne
 		public int WhalerGoals;
 		public int CanadienGoals;
 		public int TotalGoals;
+		public int RegularSeasonGoals;
 
 		public SeasonInformation()
 		{
@@ -24,6 +25,8 @@ namespace EMRHLSeasonOne
 			this.SabreGoals = 0;
 			this.WhalerGoals = 0;
 			this.CanadienGoals = 0;
+			this.TotalGoals = 0;
+			this.RegularSeasonGoals = 0;
 		}
 
 		public void AddGameResult(string date, string team1, int team1score, string team2, int team2score)
@@ -46,7 +49,18 @@ namespace EMRHLSeasonOne
 			}
 		}
 
-		protected void CalculateSeasonGoalTotal()
+		public void PrintRegularSeasonInformation()
+		{
+			foreach (var item in Games)
+			{
+				if (!item.PlayoffGame)
+				{
+					Console.WriteLine(item.Result);
+				}
+			}
+		}
+
+		protected void CalculateGoalTotal()
 		{
 			this.BruinGoals = this.CanadienGoals = this.SabreGoals = this.WhalerGoals = 0;
 
@@ -88,14 +102,69 @@ namespace EMRHLSeasonOne
 			}
 		}
 
-		public void PrintSeasonGoalTotals()
+		protected void CalculateRegularSeasonGoalTotal()
 		{
-			CalculateSeasonGoalTotal();
+			this.BruinGoals = this.CanadienGoals = this.SabreGoals = this.WhalerGoals = 0;
+
+			foreach (var item in Games)
+			{
+				if (!item.PlayoffGame)
+				{
+					switch (item.TeamOne)
+					{
+						case "Bruins":
+							this.BruinGoals += item.TeamOneScore;
+							break;
+						case "Sabres":
+							this.SabreGoals += item.TeamOneScore;
+							break;
+						case "Canadiens":
+							this.CanadienGoals += item.TeamOneScore;
+							break;
+						case "Whalers":
+							this.WhalerGoals += item.TeamOneScore;
+							break;
+					}
+
+					switch (item.TeamTwo)
+					{
+						case "Bruins":
+							this.BruinGoals += item.TeamTwoScore;
+							break;
+						case "Sabres":
+							this.SabreGoals += item.TeamTwoScore;
+							break;
+						case "Canadiens":
+							this.CanadienGoals += item.TeamTwoScore;
+							break;
+						case "Whalers":
+							this.WhalerGoals += item.TeamTwoScore;
+							break;
+					}
+				}
+
+				this.RegularSeasonGoals = this.BruinGoals + this.CanadienGoals + this.SabreGoals + this.WhalerGoals;
+			}
+		}
+
+		public void PrintGoalTotals()
+		{
+			CalculateGoalTotal();
 			PrintTeamGoal("Bruins", this.BruinGoals);
 			PrintTeamGoal("Canadiens", this.CanadienGoals);
 			PrintTeamGoal("Sabres", this.SabreGoals);
 			PrintTeamGoal("Whalers", this.WhalerGoals);
 			Console.WriteLine("There were a total of {0} goals scored.", this.TotalGoals);
+		}
+
+		public void PrintRegularSeasonGoalTotals()
+		{
+			CalculateRegularSeasonGoalTotal();
+			//PrintTeamGoal("Bruins", this.BruinGoals);
+			//PrintTeamGoal("Canadiens", this.CanadienGoals);
+			//PrintTeamGoal("Sabres", this.SabreGoals);
+			//PrintTeamGoal("Whalers", this.WhalerGoals);
+			Console.WriteLine("There were a total of {0} Regular Season goals scored.", this.RegularSeasonGoals);
 		}
 
 		protected void PrintTeamGoal(string team, int goals)
