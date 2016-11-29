@@ -9,6 +9,7 @@ namespace EMRHLSeasonOne
 	class Program
 	{
 		static List<PlayerInformation> players = new List<PlayerInformation>();
+		static List<SeasonInformation> seasons = new List<SeasonInformation>();
 		static Dictionary<string, string> teams = new Dictionary<string, string>();
 		static string c = "Canadiens";
 		static string b = "Bruins";
@@ -25,6 +26,12 @@ namespace EMRHLSeasonOne
 				item.PrintInformation();
 			}
 
+			foreach (var item in seasons)
+			{
+				item.PrintInformation();
+				item.PrintSeasonGoalTotals();
+			}
+
 			Console.ReadLine();
 		}
 
@@ -36,6 +43,7 @@ namespace EMRHLSeasonOne
 			teams.Add("S", "Sabres");
 
 			CreatePlayers();
+			CreateSeasons();
 		}
 
 		static void CreatePlayers()
@@ -195,6 +203,27 @@ namespace EMRHLSeasonOne
 			players.Add(p28);
 			players.Add(p29);
 			players.Add(p30);
+		}
+
+		static void CreateSeasons()
+		{
+			SeasonInformation s1 = new SeasonInformation();
+			s1.SeasonNumber = 1;
+			s1.AddGameResult("5/5/1999", w, 14, b, 6);
+			s1.AddGameResult("5/5/1999", c, 8, s, 7);
+			s1.AddGameResult("5/12/1999", s, 5, w, 11);
+			s1.AddGameResult("5/12/1999", b, 9, c, 5);
+			s1.AddGameResult("5/19/1999", b, 7, s, 6);
+			s1.AddGameResult("5/19/1999", c, 7, w, 6);
+			s1.AddGameResult("5/26/1999", s, 11, c, 7);
+			s1.AddGameResult("5/26/1999", w, 9, b, 5);
+			s1.AddGameResult("6/2/1999", b, 7, c, 3);
+			s1.AddGameResult("6/2/1999", s, 8, w, 2);
+			s1.AddGameResult("6/9/1999", w, 8, c, 4, true);
+			s1.AddGameResult("6/9/1999", b, 6, s, 3, true);
+			s1.AddGameResult("6/9/1999", w, 6, b, 4, true);
+
+			seasons.Add(s1);
 		}
 	}
 }
