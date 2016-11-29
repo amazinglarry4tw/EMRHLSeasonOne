@@ -33,7 +33,13 @@ namespace EMRHLSeasonOne
 			//	item.PrintRegularSeasonGoalTotals();
 			//}
 
-			OrderPlayersByFewestSeasons();
+			//OrderPlayersByFewestSeasons();
+
+			foreach (var item in seasons)
+			{
+				Console.WriteLine(string.Format("Season {0}", item.SeasonNumber));
+				item.PrintTeamPlayers();
+			}
 
 			Console.ReadLine();
 		}
@@ -43,6 +49,7 @@ namespace EMRHLSeasonOne
 			CreatePlayers();
 			CreateSeasons();
 			InitializeGoalPool();
+			InitalizeSeasonPlayers();
 		}
 
 		static void CreatePlayers()
@@ -286,6 +293,45 @@ namespace EMRHLSeasonOne
 			{
 				goalPool.Add(item.PlayerName, item.Goals);
 			}
+		}
+
+		static void InitalizeSeasonPlayers()
+		{
+			foreach (var p in players)
+			{
+				if (p.Teams.Count > 0)
+				{
+					foreach (var team in p.Teams)
+					{
+						switch (team.Value)
+						{
+							case "Bruins":
+								GetSeason(team.Key).AddTeamPlayer(b, p.PlayerName);
+								break;
+							case "Canadiens":
+								GetSeason(team.Key).AddTeamPlayer(c, p.PlayerName);
+								break;
+							case "Sabres":
+								GetSeason(team.Key).AddTeamPlayer(s, p.PlayerName);
+								break;
+							case "Whalers":
+								GetSeason(team.Key).AddTeamPlayer(w, p.PlayerName);
+								break;
+						}
+					}
+				}
+			}
+		}
+
+		static SeasonInformation GetSeason(int seasonNumber)
+		{
+			SeasonInformation temp = new SeasonInformation();
+			foreach (var item in seasons)
+			{
+				if (item.SeasonNumber == seasonNumber)
+					temp = item;
+			}
+			return temp;
 		}
 
 		static void OrderPlayersByFewestSeasons()

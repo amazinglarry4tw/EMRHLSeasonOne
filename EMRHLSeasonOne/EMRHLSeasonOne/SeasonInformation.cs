@@ -17,6 +17,16 @@ namespace EMRHLSeasonOne
 		public int TotalGoals;
 		public int RegularSeasonGoals;
 
+		public List<string> BruinsPlayers;
+		public List<string> CanadiensPlayers;
+		public List<string> SabresPlayers;
+		public List<string> WhalersPlayers;
+
+		//public Dictionary<string, int> BruinsPlayers;
+		//public Dictionary<string, int> CanadiensPlayers;
+		//public Dictionary<string, int> SabresPlayers;
+		//public Dictionary<string, int> WhalersPlayers;
+
 		public SeasonInformation()
 		{
 			this.SeasonNumber = 0;
@@ -27,6 +37,79 @@ namespace EMRHLSeasonOne
 			this.CanadienGoals = 0;
 			this.TotalGoals = 0;
 			this.RegularSeasonGoals = 0;
+
+			this.BruinsPlayers = new List<string>();
+			this.CanadiensPlayers = new List<string>();
+			this.SabresPlayers = new List<string>();
+			this.WhalersPlayers = new List<string>();
+
+			//this.BruinsPlayers = new Dictionary<string, int>();
+			//this.CanadiensPlayers = new Dictionary<string, int>();
+			//this.SabresPlayers = new Dictionary<string, int>();
+			//this.WhalersPlayers = new Dictionary<string, int>();
+		}
+
+		public void AddTeamPlayer(string team, string player)
+		{
+			switch (team)
+			{
+				case "Bruins":
+					this.BruinsPlayers.Add(player);
+					break;
+				case "Canadiens":
+					this.CanadiensPlayers.Add(player);
+					break;
+				case "Sabres":
+					this.SabresPlayers.Add(player);
+					break;
+				case "Whalers":
+					this.WhalersPlayers.Add(player);
+					break;
+			}
+		}
+
+		public void PrintTeamPlayers()
+		{
+			PrintPlayers("Bruins");
+			PrintPlayers("Canadiens");
+			PrintPlayers("Sabres");
+			PrintPlayers("Whalers");
+		}
+
+		protected void PrintPlayers(string team)
+		{
+			switch (team)
+			{
+				case "Bruins":
+					Console.WriteLine("Bruins Roster:");
+					foreach (var item in BruinsPlayers)
+					{
+						Console.WriteLine(string.Format("{0}", item));
+					}
+					break;
+				case "Canadiens":
+					Console.WriteLine("Canadiens Roster:");
+					foreach (var item in CanadiensPlayers)
+					{
+						Console.WriteLine(string.Format("{0}", item));
+					}
+					break;
+				case "Sabres":
+					Console.WriteLine("Sabres Roster:");
+					foreach (var item in SabresPlayers)
+					{
+						Console.WriteLine(string.Format("{0}", item));
+					}
+					break;
+				case "Whalers":
+					Console.WriteLine("Whalers Roster:");
+					foreach (var item in WhalersPlayers)
+					{
+						Console.WriteLine(string.Format("{0}", item));
+					}
+					break;
+			}
+			Console.WriteLine();
 		}
 
 		public void AddGameResult(string date, string team1, int team1score, string team2, int team2score)
