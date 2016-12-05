@@ -38,7 +38,8 @@ namespace EMRHLSeasonOne
 			foreach (var item in seasons)
 			{
 				Console.WriteLine(string.Format("Season {0}", item.SeasonNumber));
-				item.PrintTeamPlayers();
+				item.PrintRegularSeasonGoalTotals();
+				Console.WriteLine();
 			}
 
 			Console.ReadLine();
