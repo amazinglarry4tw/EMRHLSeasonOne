@@ -34,11 +34,14 @@ namespace EMRHLSeasonOne
 			//}
 
 			//OrderPlayersByFewestSeasons();
+			SortPlayerGoalsIntoSeasons();
 
 			foreach (var item in seasons)
 			{
 				Console.WriteLine(string.Format("Season {0}", item.SeasonNumber));
 				item.PrintRegularSeasonGoalTotals();
+				Console.WriteLine(string.Format("{0} goals in the goal pool.", item.SeasonGoalPool.Count));
+				item.PrintGoalPool();
 				Console.WriteLine();
 			}
 
@@ -341,6 +344,39 @@ namespace EMRHLSeasonOne
 			foreach (var item in fewest)
 			{
 				item.PrintInformation();
+			}
+		}
+
+		static void SortPlayerGoalsIntoSeasons()
+		{
+			// Put all players with 1 season into the pool.
+			foreach (var item in players)
+			{
+				if (item.Teams.Count == 1)
+				{
+					int season = 0;
+
+					switch (item.Teams.Keys.First())
+					{
+						case 1:
+							season = 0;
+							break;
+						case 2:
+							season = 1;
+							break;
+						case 3:
+							season = 2;
+							break;
+						case 4:
+							season = 3;
+							break;
+					}
+
+					for (int i = 0; i < item.Goals; i++)
+					{
+						seasons[season].AddPlayerToGoalPool(item.PlayerName);
+					}
+				}
 			}
 		}
 	}

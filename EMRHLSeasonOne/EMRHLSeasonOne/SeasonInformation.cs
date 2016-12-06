@@ -111,6 +111,14 @@ namespace EMRHLSeasonOne
 			Console.WriteLine();
 		}
 
+		public void PrintGoalPool()
+		{
+			foreach (var item in SeasonGoalPool)
+			{
+				Console.WriteLine(item);
+			}
+		}
+
 		public void AddGameResult(string date, string team1, int team1score, string team2, int team2score)
 		{
 			GameResult temp = new GameResult(date, team1, team1score, team2, team2score);
