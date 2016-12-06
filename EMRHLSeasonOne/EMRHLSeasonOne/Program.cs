@@ -21,21 +21,6 @@ namespace EMRHLSeasonOne
 		{
 			Initialize();
 
-			//foreach (var item in players)
-			//{
-			//	item.PrintInformation();
-			//}
-
-			//foreach (var item in seasons)
-			//{
-			//	item.PrintInformation();
-			//	item.PrintGoalTotals();
-			//	item.PrintRegularSeasonGoalTotals();
-			//}
-
-			//OrderPlayersByFewestSeasons();
-			SortPlayerGoalsIntoSeasons();
-
 			foreach (var item in seasons)
 			{
 				Console.WriteLine(string.Format("Season {0}", item.SeasonNumber));
@@ -54,6 +39,7 @@ namespace EMRHLSeasonOne
 			CreateSeasons();
 			InitializeGoalPool();
 			InitalizeSeasonPlayers();
+			SortPlayerGoalsIntoSeasons();
 		}
 
 		static void CreatePlayers()
@@ -351,6 +337,7 @@ namespace EMRHLSeasonOne
 
 		static void SortPlayerGoalsIntoSeasons()
 		{
+			// Create a Temp Goal Pool for all goals to pull from.
 			List<string> TempGoalPool = new List<string>();
 			foreach (var item in players)
 			{
@@ -386,8 +373,42 @@ namespace EMRHLSeasonOne
 					{
 						seasons[season].AddPlayerToGoalPool(item.PlayerName);
 					}
+
+					for (int i = 0; i < TempGoalPool.Count; i++)
+					{
+						if (TempGoalPool[i].ToString() == item.PlayerName)
+						{
+							TempGoalPool[i] = "USED";
+						}
+					}
 				}
 			}
+
+			// Try to sort the rest somehow... fuck.
+			while (!Continue(TempGoalPool))
+			{
+				// The plan:
+				// Go through each season, and find a team that has goals remaining
+				// If a team has goals remaining, pick a player with the fewest amount of goals
+				// on that team, verify they have goals remaining in the pool.  If they do, bring
+				// it over.  If they do not, find the next player with the fewest goals that has
+				// some remaining in the pool.  Once they are used, move to the next season.  
+
+
+				// At the end, if the GoalPool only has Gastonbury and or SUBGOALS, assign them
+				// and end it.  
+			}
+		}
+
+		static bool Continue(List<string> pool)
+		{
+			bool complete = true;
+			foreach (var item in pool)
+			{
+				if (item != "USED")
+					complete = false;
+			}
+			return complete;
 		}
 	}
 }
