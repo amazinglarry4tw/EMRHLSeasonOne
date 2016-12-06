@@ -182,6 +182,7 @@ namespace EMRHLSeasonOne
 			PlayerInformation p29 = new PlayerInformation("Kurt Need", 0, 1);
 			p29.AddTeam(1, w);
 			PlayerInformation p30 = new PlayerInformation("Mike Gastonguay", 1, 0);
+			PlayerInformation p31 = new PlayerInformation("SUBGOAL", 10, 0);
 
 			players.Add(p1);
 			players.Add(p2);
@@ -213,6 +214,7 @@ namespace EMRHLSeasonOne
 			players.Add(p28);
 			players.Add(p29);
 			players.Add(p30);
+			players.Add(p31);
 		}
 
 		static void CreateSeasons()
@@ -349,6 +351,14 @@ namespace EMRHLSeasonOne
 
 		static void SortPlayerGoalsIntoSeasons()
 		{
+			List<string> TempGoalPool = new List<string>();
+			foreach (var item in players)
+			{
+				for (int i = 0; i < item.Goals; i++)
+					TempGoalPool.Add(item.PlayerName);
+			}
+
+			Console.WriteLine(TempGoalPool.Count);
 			// Put all players with 1 season into the pool.
 			foreach (var item in players)
 			{
